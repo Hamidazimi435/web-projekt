@@ -13,8 +13,31 @@ if (hour >= 5 && hour < 12) {
     timeGreetingText = 'Guten Abend';
 }
 
-// Text ins HTML schreiben
-timeGreetingParagraph.textContent = timeGreetingText;
+
+
+const liveClockParagraph = document.getElementById('live-clock');
+//Funktion: Uhrzeit 
+function getCurrentTime () {
+    const now = new Date();
+
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+
+    hours = String(hours).padStart(2, '0');
+    minutes = String(minutes).padStart(2, '0');
+    seconds = String(seconds).padStart(2, '0');
+
+    return `${hours}:${minutes}:${seconds}`;
+}
+
+// Alle 1 Sekunde aktuelisieren
+setInterval (function (){
+    liveClockParagraph.textContent = getCurrentTime();
+}, 1000);
+
+// Beim ersten Laden sofort anzeigen
+liveClockParagraph.textContent = getCurrentTime();
 
 
 const button = document.getElementById('show-message');
