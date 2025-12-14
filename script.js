@@ -1,3 +1,21 @@
+const toggleThemeButton = document.getElementById('toggle-theme');
+const body = document.body;
+
+let isDarkMode = false;
+
+toggleThemeButton.addEventListener('click', function () {
+    if (!isDarkMode) {
+        body.classList.add('dark-mode');
+        toggleThemeButton.textContent = 'Dark Mode ausschalten';
+        isDarkMode = true;
+    } else {
+        body.classList.remove('dark-mode');
+        toggleThemeButton.textContent = 'Dark Mode einschalten';
+        isDarkMode = false;
+    }
+});
+
+
 const timeGreetingParagraph = document.getElementById('time-greeting');
 //Atuelle Uhrzeit holen
 const now = new Date();
@@ -59,4 +77,5 @@ button.addEventListener('click', function () {
     }
     
 });
+
 

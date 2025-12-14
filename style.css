@@ -1,12 +1,32 @@
 body {
-     display: flex;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
     justify-content: center;
     align-items: center;
-    height:  100vh; 
-
 }
 
-h1 {
-    color: blue;
-    font-family: Arial,sans-serif;
+main {
+    text-align: center;
+}
+
+/* Standard: heller Hintergrund */
+body {
+    background-color: #f5f5f5;
+    color: #222;
+}
+
+/* Dark Mode: andere Farben */
+body.dark-mode {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+}
+
+/* optional: Button etwas schöner */
+button {
+    margin: 8px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
 }
