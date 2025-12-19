@@ -32,21 +32,29 @@ if (hour >= 5 && hour < 12) {
 }
 
 
-
+const form = document.getElementById('user-form');
 const nameInput = document.getElementById('username');
-const greetButton = document.getElementById('greet-user');
 const userGreeting = document.getElementById('user-greeting');
+const resetButton = document.getElementById('reset-form');
 
-greetButton.addEventListener('click', function (){
+form.addEventListener('submit', function (event) {
+    event.preventDefault(); // verhindert Seiten-Neuladen
+
     const name = nameInput.value.trim();
 
-    if (name === ''){
-        userGreeting.textContent = 'Bitte gib deine Name ein!:';
+    if (name === '') {
+        userGreeting.textContent = 'Bitte gib deinen Namen ein.';
         return;
     }
 
-    userGreeting.textContent = `Hallo ${name}, schön das du hier bist!`;
-}) 
+    userGreeting.textContent = `Hallo ${name}, schön dass du hier bist!`;
+});
+
+resetButton.addEventListener('click', function () {
+    nameInput.value = '';
+    userGreeting.textContent = '';
+});
+
 
 
 
