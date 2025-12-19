@@ -15,6 +15,23 @@ if (hour >= 5 && hour < 12) {
 
 
 
+const nameInput = document.getElementById('username');
+const greetButton = document.getElementById('greet-user');
+const userGreeting = document.getElementById('user-greeting');
+
+greetButton.addEventListener('click', function (){
+    const name = nameInput.value.trim();
+
+    if (name === ''){
+        userGreeting.textContent = 'Bitte gib deine Name ein!:';
+        return;
+    }
+
+    userGreeting.textContent = `Hallo ${name}, schön das du hier bist!`;
+}) 
+
+
+
 const liveClockParagraph = document.getElementById('live-clock');
 //Funktion: Uhrzeit 
 function getCurrentTime () {
