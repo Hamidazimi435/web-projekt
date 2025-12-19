@@ -8,12 +8,19 @@
     </head>
 <body class="dark-mode">
     <main>
+
         <h1>Willkommen auf unserer Webseite!</h1>
 
+        <form id ="user-form">
         <input type="text" id="username" placeholder="Dein Name">
-        <button id="greet-user">Begrüßen</button>
+        <button type="submit">Begrüßen</button>
+        <button type="button" id="reset-form">Zurücksetzen</button>
+        </form>
+        
         <p id="user-greeting"></p>
         
+
+
             <p id="time-greeting"></p>
             <!-- NEU: Live-Uhr -->
             <p id="live-clock"></p>
@@ -21,6 +28,9 @@
         <p id="message"></p>
         <!-- NEU: Dark-Mode-Schalter -->
     <button id="toggle-theme">Dark Mode einschalten</button>
+    
+       
+    
     </main>
 <script src="script.js"></script>
 </body>
