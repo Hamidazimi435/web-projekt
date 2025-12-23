@@ -36,23 +36,37 @@ const form = document.getElementById('user-form');
 const nameInput = document.getElementById('username');
 const userGreeting = document.getElementById('user-greeting');
 const resetButton = document.getElementById('reset-form');
+const errormassage = document.getElementById("error-massage");
+
 
 form.addEventListener('submit', function (event) {
     event.preventDefault(); // verhindert Seiten-Neuladen
 
     const name = nameInput.value.trim();
 
+    //Reset Styles
+    nameInput.classList.remove('empty-field', 'filled-field');
+    errormassage.textContent = '';
+
     if (name === '') {
-        userGreeting.textContent = 'Bitte gib deinen Namen ein.';
+        nameInput.classList.add('empty-field');
+        errormassage.textContent = 'Bitte gib deinen Namen ein.';
         return;
     }
 
+    nameInput.classList.add('filled-field');
+    localStorage.setItem('username', name)
     userGreeting.textContent = `Hallo ${name}, schön dass du hier bist!`;
 });
 
+// Zurücksetzen
 resetButton.addEventListener('click', function () {
     nameInput.value = '';
     userGreeting.textContent = '';
+    errormassage.textContent = '';
+
+    nameInput.classList.remove('empty-field', 'filled-field');
+    localStorage.classList.remove('username');
 });
 
 
