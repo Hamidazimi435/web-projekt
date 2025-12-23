@@ -1,46 +1,49 @@
 body {
-    min-height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f5f5f5;
+  color: #222;
 }
 
 main {
-    text-align: center;
+  text-align: center;
+  padding: 20px;
 }
 
-/* Standard: heller Hintergrund */
-body {
-    background-color: #f5f5f5;
-    color: #222;
-}
-
-/* Dark Mode: andere Farben */
-body.dark-mode {
-    background-color: #1e1e1e;
-    color: #f5f5f5;
-}
-
-/* optional: Button etwas schöner */
 button {
-    margin: 8px;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
+  margin: 8px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
 }
 
-.empty-field {
-     border: 2px solid red;
-
+input {
+  padding: 8px;
+  margin: 8px;
 }
 
-.filled-field {
-    border: 2px solid green;
+/* Dark Mode */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
 }
 
-#error-massage {
-    color: red;
-    margin-top: 8px;
+/* Validierung: Fehler / Erfolg */
+.input-error {
+  border: 2px solid red;
+}
+
+.input-success {
+  border: 2px solid green;
+}
+
+#error-message {
+  color: red;
+  margin-top: 8px;
 }

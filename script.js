@@ -1,120 +1,143 @@
+// ------------------------------
+// Dark Mode (mit LocalStorage)
+// ------------------------------
 const toggleThemeButton = document.getElementById('toggle-theme');
 const body = document.body;
 
-let isDarkMode = false;
+// Theme beim Laden anwenden
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  body.classList.add('dark-mode');
+  toggleThemeButton.textContent = 'Dark Mode ausschalten';
+} else {
+  toggleThemeButton.textContent = 'Dark Mode einschalten';
+}
 
+// Button: Theme umschalten + speichern
 toggleThemeButton.addEventListener('click', function () {
-    if (!isDarkMode) {
-        body.classList.add('dark-mode');
-        toggleThemeButton.textContent = 'Dark Mode ausschalten';
-        isDarkMode = true;
-    } else {
-        body.classList.remove('dark-mode');
-        toggleThemeButton.textContent = 'Dark Mode einschalten';
-        isDarkMode = false;
-    }
+  const isDark = body.classList.contains('dark-mode');
+
+  if (!isDark) {
+    body.classList.add('dark-mode');
+    toggleThemeButton.textContent = 'Dark Mode ausschalten';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    body.classList.remove('dark-mode');
+    toggleThemeButton.textContent = 'Dark Mode einschalten';
+    localStorage.setItem('theme', 'light');
+  }
 });
 
-
+// ------------------------------
+// Zeitabhängige Begrüßung
+// ------------------------------
 const timeGreetingParagraph = document.getElementById('time-greeting');
-//Atuelle Uhrzeit holen
-const now = new Date();
-const hour = now.getHours();
+const nowForGreeting = new Date();
+const hour = nowForGreeting.getHours();
 
 let timeGreetingText = '';
 
 if (hour >= 5 && hour < 12) {
-    timeGreetingText = 'Guten Morgen';
-} else if (hour >= 12 && hour < 18 ){
-    timeGreetingText = 'Guten Tag';
+  timeGreetingText = 'Guten Morgen';
+} else if (hour >= 12 && hour < 18) {
+  timeGreetingText = 'Guten Tag';
 } else {
-    timeGreetingText = 'Guten Abend';
+  timeGreetingText = 'Guten Abend';
 }
 
+timeGreetingParagraph.textContent = timeGreetingText;
 
+// ------------------------------
+// Live Uhr (HH:MM:SS)
+// ------------------------------
+const liveClockParagraph = document.getElementById('live-clock');
+
+function getCurrentTime() {
+  const now = new Date();
+
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
+
+  hours = String(hours).padStart(2, '0');
+  minutes = String(minutes).padStart(2, '0');
+  seconds = String(seconds).padStart(2, '0');
+
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+// sofort anzeigen
+liveClockParagraph.textContent = getCurrentTime();
+
+// jede Sekunde aktualisieren
+setInterval(function () {
+  liveClockParagraph.textContent = getCurrentTime();
+}, 1000);
+
+// ------------------------------
+// Nachricht ein-/ausblenden (Toggle)
+// ------------------------------
+const messageButton = document.getElementById('show-message');
+const messageParagraph = document.getElementById('message');
+
+let isMessageVisible = false;
+const messageText = 'Schön, dass du hier bist!';
+
+messageButton.addEventListener('click', function () {
+  if (!isMessageVisible) {
+    messageParagraph.textContent = messageText;
+    messageButton.textContent = 'Nachricht ausblenden';
+    isMessageVisible = true;
+  } else {
+    messageParagraph.textContent = '';
+    messageButton.textContent = 'Nachricht anzeigen';
+    isMessageVisible = false;
+  }
+});
+
+// ------------------------------
+// Formular: Name + Validierung + LocalStorage
+// ------------------------------
 const form = document.getElementById('user-form');
 const nameInput = document.getElementById('username');
 const userGreeting = document.getElementById('user-greeting');
 const resetButton = document.getElementById('reset-form');
-const errormassage = document.getElementById("error-massage");
+const errorMessage = document.getElementById('error-message');
 
-
-form.addEventListener('submit', function (event) {
-    event.preventDefault(); // verhindert Seiten-Neuladen
-
-    const name = nameInput.value.trim();
-
-    //Reset Styles
-    nameInput.classList.remove('empty-field', 'filled-field');
-    errormassage.textContent = '';
-
-    if (name === '') {
-        nameInput.classList.add('empty-field');
-        errormassage.textContent = 'Bitte gib deinen Namen ein.';
-        return;
-    }
-
-    nameInput.classList.add('filled-field');
-    localStorage.setItem('username', name)
-    userGreeting.textContent = `Hallo ${name}, schön dass du hier bist!`;
-});
-
-// Zurücksetzen
-resetButton.addEventListener('click', function () {
-    nameInput.value = '';
-    userGreeting.textContent = '';
-    errormassage.textContent = '';
-
-    nameInput.classList.remove('empty-field', 'filled-field');
-    localStorage.classList.remove('username');
-});
-
-
-
-
-const liveClockParagraph = document.getElementById('live-clock');
-//Funktion: Uhrzeit 
-function getCurrentTime () {
-    const now = new Date();
-
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
-    let seconds = now.getSeconds();
-
-    hours = String(hours).padStart(2, '0');
-    minutes = String(minutes).padStart(2, '0');
-    seconds = String(seconds).padStart(2, '0');
-
-    return `${hours}:${minutes}:${seconds}`;
+// gespeicherten Namen laden
+const savedName = localStorage.getItem('username');
+if (savedName) {
+  nameInput.value = savedName;
+  userGreeting.textContent = `Hallo ${savedName}, schön dass du hier bist!`;
+  nameInput.classList.add('input-success');
 }
 
-// Alle 1 Sekunde aktuelisieren
-setInterval (function (){
-    liveClockParagraph.textContent = getCurrentTime();
-}, 1000);
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
 
-// Beim ersten Laden sofort anzeigen
-liveClockParagraph.textContent = getCurrentTime();
+  const name = nameInput.value.trim();
 
+  // Styles/Fehler zurücksetzen
+  nameInput.classList.remove('input-error', 'input-success');
+  errorMessage.textContent = '';
 
-const button = document.getElementById('show-message');
-const messageParagraph = document.getElementById('message');
+  if (name === '') {
+    nameInput.classList.add('input-error');
+    errorMessage.textContent = 'Bitte gib deinen Namen ein.';
+    userGreeting.textContent = '';
+    return;
+  }
 
-
-let isVisible = false;
-const greetingText = 'Schön, dass du hier bist!'
-
-button.addEventListener('click', function () {
-    if (!isVisible) {
-        messageParagraph.textContent = greetingText;
-        button.textContent = 'Nachricht ausblenden';
-        isVisible = true;
-    }else {
-        messageParagraph.textContent = '';
-        button.textContent = 'Nachricht anzeigen';
-        isVisible = false;
-    }
-    
+  nameInput.classList.add('input-success');
+  localStorage.setItem('username', name);
+  userGreeting.textContent = `Hallo ${name}, schön dass du hier bist!`;
 });
 
+resetButton.addEventListener('click', function () {
+  nameInput.value = '';
+  userGreeting.textContent = '';
+  errorMessage.textContent = '';
 
+  nameInput.classList.remove('input-error', 'input-success');
+  localStorage.removeItem('username');
+});
