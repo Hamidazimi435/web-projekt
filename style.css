@@ -30,3 +30,17 @@ button {
     border: none;
     cursor: pointer;
 }
+
+.empty-field {
+     border: 2px solid red;
+
+}
+
+.filled-field {
+    border: 2px solid green;
+}
+
+#error-massage {
+    color: red;
+    margin-top: 8px;
+}
