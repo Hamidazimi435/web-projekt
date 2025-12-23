@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Startseite</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
-<body class="dark-mode">
-    <main>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startseite</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-        <h1>Willkommen auf unserer Webseite!</h1>
+<body>
+  <main>
+    <h1>Willkommen auf unserer Webseite!</h1>
 
-        <form id ="user-form">
-        <input type="text" id="username" placeholder="Dein Name">
-        <button type="submit">Begrüßen</button>
-        <button type="button" id="reset-form">Zurücksetzen</button>
-        </form>
-        <p id="error-massage"></p>
-        <p id="user-greeting"></p>
-        
+    <!-- Zeitabhängige Begrüßung -->
+    <p id="time-greeting"></p>
 
+    <!-- Live-Uhr -->
+    <p id="live-clock"></p>
 
-            <p id="time-greeting"></p>
-            <!-- NEU: Live-Uhr -->
-            <p id="live-clock"></p>
-        <button id="show-message">Nachricht anzeigen</button>
-        <p id="message"></p>
-        <!-- NEU: Dark-Mode-Schalter -->
+    <!-- Dark Mode -->
     <button id="toggle-theme">Dark Mode einschalten</button>
-    
-       
-    
-    </main>
-<script src="script.js"></script>
+
+    <!-- Nachricht Toggle -->
+    <button id="show-message">Nachricht anzeigen</button>
+    <p id="message"></p>
+
+    <hr />
+
+    <!-- Formular: Name -->
+    <form id="user-form">
+      <input type="text" id="username" placeholder="Dein Name" />
+      <button type="submit">Begrüßen</button>
+      <button type="button" id="reset-form">Zurücksetzen</button>
+    </form>
+
+    <p id="error-message"></p>
+    <p id="user-greeting"></p>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
