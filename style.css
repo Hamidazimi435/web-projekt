@@ -47,3 +47,18 @@ body.dark-mode {
   color: red;
   margin-top: 8px;
 }
+
+/* Fade-In Animation */
+.fade-in {
+  opacity: 0;
+  animation: fadeInAnimation 1s ease forwards;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
