@@ -47,6 +47,11 @@ if (hour >= 5 && hour < 12) {
 
 timeGreetingParagraph.textContent = timeGreetingText;
 
+// NEU: Fade-In auslösen
+timeGreetingParagraph.classList.remove('fade-in');
+void timeGreetingParagraph.offsetWidth;
+timeGreetingParagraph.classList.add('fade-in');
+
 // ------------------------------
 // Live Uhr (HH:MM:SS)
 // ------------------------------
